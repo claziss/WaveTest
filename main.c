@@ -53,13 +53,13 @@ ISR(TIMER1_COMPA_vect)
     {
       asm volatile("sbi %0, %1" : :"I" (_SFR_IO_ADDR(PORTD)) , "I" (PD4)); //SET_DALI_TX(); // DALI output pin high
       value = 0;
-      OCR1A = 600;
+      OCR1A = TE; //600;
     }
   else
     {
       asm volatile("cbi %0, %1" : :"I" (_SFR_IO_ADDR(PORTD)) , "I" (PD4)); //RESET_DALI_TX(); // DALI output pin low
       value = 1;
-      OCR1A = 260;
+      OCR1A = TE; //260;
     }
 
 }
