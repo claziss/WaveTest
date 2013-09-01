@@ -12,7 +12,7 @@ PRG            = main
 OBJ            = main.o
 
 ### AVRDUDE OPTIONS
-DUDE_OPTIONS = -p $(MCU_TARGET) -P $(SERIAL_PORT) -c dragon_jtag -F
+DUDE_OPTIONS = -p $(MCU_TARGET) -P $(SERIAL_PORT) -c dragon_jtag
 
 ### GCC OPTIONS
 CC             = avr-gcc
@@ -47,6 +47,9 @@ upload: hex
 
 fuse:
 	avrdude $(DUDE_OPTIONS) -Ulfuse:w:0xe2:m -Uhfuse:w:0x99:m -Uefuse:w:0xff:m
+
+read_fuse:
+	avrdude $(DUDE_OPTIONS) -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h -U lock:r:-:h
 
 lst:  $(PRG).lst
 
